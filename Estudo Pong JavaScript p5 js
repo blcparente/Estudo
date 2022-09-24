@@ -1,0 +1,70 @@
+//Variáveis Bolinha
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 25
+let raio = diametro / 2
+let velocidadeXBolinha = 5
+let velocidadeYBolinha = 6
+
+//Variáveis Raquete 1
+var xRaquete1 = 10
+var yRaquete1 = 150
+var larguraRaquete1 = 10
+var alturaRaquete1 = 90
+
+//Proporções da tela
+function setup() {
+  createCanvas(600, 400);
+}
+//Function draw()
+function draw() {
+  background(0)
+  mostraBolinha()
+  movimentaBolinha()
+  verificaColisaoBorda()
+  mostraRaquete1()
+  movimentaRaquete1()
+  verificacolisaoRaquete1()
+  
+}
+//Funções
+function mostraBolinha(){
+    circle(xBolinha,yBolinha,diametro);
+}
+
+function movimentaBolinha(){
+    xBolinha += velocidadeXBolinha
+    yBolinha += velocidadeYBolinha
+}
+
+function verificaColisaoBorda(){
+    if (xBolinha + raio > width ||
+    xBolinha - raio < 0){
+    velocidadeXBolinha *= -1;
+  } 
+    if (yBolinha + raio > height ||
+    yBolinha - raio < 0){
+    velocidadeYBolinha *= -1
+  }
+}
+
+function mostraRaquete1(){
+  rect(xRaquete1,yRaquete1,larguraRaquete1,alturaRaquete1)
+}
+
+function movimentaRaquete1(){
+  if (keyIsDown(UP_ARROW)){
+    yRaquete1 -= 8
+  }
+  if (keyIsDown(DOWN_ARROW)){
+    yRaquete1 += 8
+}
+}
+
+  function verificacolisaoRaquete1(){
+  if (xBolinha - raio < xRaquete1 + larguraRaquete1
+      && yBolinha - raio < yRaquete1 + alturaRaquete1 && yBolinha + raio > yRaquete1){
+    velocidadeXBolinha *= -1
+  }
+
+}
